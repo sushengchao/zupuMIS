@@ -1,0 +1,24 @@
+server:
+  port: 80
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db8
+    username: root
+    password: root
+  application:
+    name: user_service
+
+mybatis:
+  type-aliases-package: cn.itcast.pojo
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+
+#  instance:
+#    lease-expiration-duration-in-seconds: 90
+#    lease-renewal-interval-in-seconds: 30
