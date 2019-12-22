@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 import cn.itcast.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,8 @@ public class FeignController {
     @Autowired
     private UserClient userClient;
 
-    private User  findById(@PathVariable("id") Integer id){
+    @GetMapping("/{id}")
+    private User  findById(@PathVariable Integer id){
 
         return userClient.findById(id);
     }

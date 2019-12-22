@@ -13,6 +13,8 @@
         <module>user_consumer</module>
         <module>eureka_service</module>
         <module>feign_service</module>
+        <module>gateway_demo</module>
+        <module>config_service</module>
     </modules>
 
 
