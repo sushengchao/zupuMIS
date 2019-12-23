@@ -12,6 +12,12 @@ spring:
         enabled: true
       # 配置中心服务id
         service-id: config-server
+  # rabbitmq的配置信息；如下配置的rabbit除了IP都是默认值，
+  rabbitmq:
+    host: 192.168.192.129
+    port: 5672
+    username: guest
+    password: guest
 eureka:
     client:
       service-url:
