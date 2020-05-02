@@ -1,24 +1,21 @@
+server:
+  port: 9010
 spring:
-  cloud:
-    config:
-      # 与远程仓库中的配置文件的application保持一致
-      name: consumer
-      # 远程仓库中的配置文件的profile保持一致
-      profile: dev
-      # 远程仓库中的版本保持一致
-      label: master
-      discovery:
-      # 使用配置中心
-        enabled: true
-      # 配置中心服务id
-        service-id: config-server
-  # rabbitmq的配置信息；如下配置的rabbit除了IP都是默认值，
-  rabbitmq:
-    host: 192.168.192.129
-    port: 5672
-    username: guest
-    password: guest
+  application:
+    name: user_consumer # 应用名称
 eureka:
-    client:
-      service-url:
-        defaultZone: http://127.0.0.1:10086/eureka
+  client:
+    service-url: # EurekaServer地址
+      defaultZone: http://127.0.0.1:10086/eureka
+# 配置熔断策略：
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+      circuitBreaker:
+        errorThresholdPercentage: 50 # 触发熔断错误比例阈值，默认值50%
+        sleepWindowInMilliseconds: 10000 # 熔断后休眠时长，默认值5秒
+        requestVolumeThreshold: 10 # 熔断触发最小请求次数，默认值是20

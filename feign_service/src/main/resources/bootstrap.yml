@@ -1,24 +1,28 @@
+server:
+  port: 8080
 spring:
-  cloud:
-    config:
-      # 与远程仓库中的配置文件的application保持一致
-      name: feign
-      # 远程仓库中的配置文件的profile保持一致
-      profile: dev
-      # 远程仓库中的版本保持一致
-      label: master
-      discovery:
-      # 使用配置中心
-        enabled: true
-      # 配置中心服务id
-        service-id: config-server
-  # rabbitmq的配置信息；如下配置的rabbit除了IP都是默认值，
-  rabbitmq:
-    host: 192.168.192.129
-    port: 5672
-    username: guest
-    password: guest
+  application:
+    name: feign_service # 应用名称
 eureka:
-    client:
-      service-url:
-        defaultZone: http://127.0.0.1:10086/eureka
+  client:
+    service-url: # EurekaServer地址
+      defaultZone: http://127.0.0.1:10086/eureka
+ribbon:
+  ConnectTimeout: 1000 # 连接超时时长
+  ReadTimeout: 2000 # 数据通信超时时长
+  MaxAutoRetries: 0 # 当前服务器的重试次数
+  MaxAutoRetriesNextServer: 0 # 重试多少次服务
+  OkToRetryOnAllOperations: false # 是否对所有的请求方式都重试
+feign:
+  hystrix:
+    enabled: true # 开启Feign的熔断功能
+  compression:
+    request:
+      enabled: true # 开启请求压缩
+      mime-types: text/html,application/xml,application/json # 设置压缩的数据类型
+      min-request-size: 2048 # 设置触发压缩的大小下限
+    response:
+      enabled: true
+logging:
+  level:
+    com.itheima: debug
